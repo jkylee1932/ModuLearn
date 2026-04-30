@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModuLearn | Auth</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="alert-box">Welcome to ModuLearn!</div>
+
+    <div class="auth-card">
+        <div class="logo-section">
+            <img src="modulearn_logo.png" alt="ModuLearn Logo">
+        </div>
+        <h2>ModuLearn</h2>
+
+        <!-- LOGIN FORM -->
+        <div id="login-form" class="form-content">
+            <span class="tagline">Empowering Learning Through Innovation</span>
+            <form action="#">
+                <label>Email Address</label>
+                <input type="email" placeholder="Enter your email" required>
+                
+                <label>Password</label>
+                <input type="password" placeholder="Enter your password" required>
+
+                <div class="flex-row">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary">Login</button>
+                <p class="footer-text">Don't have an account? <a href="#" id="to-register">Sign up</a></p>
+            </form>
+        </div>
+
+        <!-- REGISTER FORM (Hidden by default) -->
+        <div id="register-form" class="form-content" style="display: none;">
+            <span class="tagline">Join our community of innovators</span>
+            <form action="#">
+                <label>Full Name</label>
+                <input type="text" placeholder="Enter your full name" required>
+
+                <label>Email Address</label>
+                <input type="email" placeholder="Enter your email" required>
+                
+                <label>Password</label>
+                <input type="password" placeholder="Create a password" required>
+
+                <button type="submit" class="btn-primary" style="margin-top: 20px;">Create Account</button>
+                <p class="footer-text">Already have an account? <a href="#" id="to-login">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
