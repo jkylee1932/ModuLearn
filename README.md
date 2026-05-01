@@ -1,4 +1,3 @@
-
 # 🎓 ModuLearn: Centralized Digital Learning Platform
 
 An all-in-one digital learning ecosystem accessible through mobile and web-based systems, designed to connect students and educators in a structured and interactive environment.
