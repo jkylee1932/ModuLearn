@@ -1,6 +1,3 @@
-Based on your request to follow the documentation style and structure of your Java & Bean Café project, here is the official documentation for **ModuLearn**.
-
----
 
 # 🎓 ModuLearn: Centralized Digital Learning Platform
 
