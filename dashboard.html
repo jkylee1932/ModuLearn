@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModuLearn | Dashboard</title>
+    <link rel="stylesheet" href="dashboard_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<div class="main-container">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+        <div class="logo-section">
+            <img src="modulearn_logo.png" class="sidebar-logo">
+            <span class="logo-text">ModuLearn</span>
+        </div>
+
+        <ul class="nav-links">
+            <li class="active">
+                <a href="#"><i class="fas fa-home"></i><span class="link-text">Home</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-book-open"></i><span class="link-text">My Courses</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-tasks"></i><span class="link-text">Activities</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-calendar-alt"></i><span class="link-text">Schedule</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-cog"></i><span class="link-text">Settings</span></a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="content-wrapper">
+        <!-- TOP BAR -->
+        <header class="top-bar">
+            <div class="search-section">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search for courses, modules...">
+            </div>
+            <div class="user-profile-top">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-bell"></i>
+                <div class="avatar">MK</div>
+            </div>
+        </header>
+
+        <!-- WELCOME BANNER -->
+        <section class="welcome-banner">
+            <div class="welcome-text">
+                <h1>Welcome back, Mark! 👋</h1>
+                <p>Continue your learning journey and explore new modules today.</p>
+            </div>
+        </section>
+
+        <!-- YOUR COURSES SECTION -->
+        <section class="courses-section">
+            <div class="section-header">
+                <h2>Your Courses</h2>
+                <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="course-grid">
+                <!-- Example Course Cards -->
+                <div class="course-card card-blue">
+                    <i class="fas fa-code"></i>
+                    <span>Web Development</span>
+                </div>
+                <div class="course-card card-purple">
+                    <i class="fas fa-database"></i>
+                    <span>Database Systems</span>
+                </div>
+                <div class="course-card card-pink">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>App Design</span>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>
