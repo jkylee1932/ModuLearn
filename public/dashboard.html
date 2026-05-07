@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModuLearn | Dashboard</title>
+    <link rel="stylesheet" href="dashboard_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            padding-top: 20px;
+        }
+
+        .aesthetic-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            color: white !important;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .aesthetic-card:hover {
+            transform: scale(1.03);
+        }
+
+        .aesthetic-card .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+
+        .aesthetic-card h3 {
+            font-size: 1.2rem;
+            margin: 0;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <nav class="sidebar">
+        <div class="logo-section">
+            <img src="modulearn_logo.png" class="sidebar-logo" alt="Logo">
+            <span class="logo-text">ModuLearn</span>
+        </div>
+        <ul class="nav-links">
+            <li class="active"><a href="dashboard.html"><i class="fas fa-home"></i><span class="link-text">Home</span></a></li>
+            <li><a href="#"><i class="fas fa-book-open"></i><span class="link-text">My Courses</span></a></li>
+            <li id="teacher-nav-link" style="display: none;"><a href="upload_module.html"><i class="fas fa-upload"></i><span class="link-text">Upload Module</span></a></li>
+            <li><a href="#" onclick="logout()" style="color: #ff4d4d;"><i class="fas fa-sign-out-alt"></i><span class="link-text">Logout</span></a></li>
+        </ul>
+    </nav>
+
+    <main class="content-wrapper">
+        <header class="top-bar">
+            <div class="search-section"><i class="fas fa-search"></i><input type="text" placeholder="Search courses..."></div>
+            <div class="user-profile-top"><div id="user-avatar" class="avatar">??</div></div>
+        </header>
+
+        <section class="welcome-banner">
+            <div class="welcome-text">
+                <h1 id="welcome-message">Welcome back! 👋</h1>
+                <p id="user-role-tag" style="font-weight: bold; color: #f2994a; text-transform: uppercase; font-size: 0.8rem;"></p>
+                <p>Continue your learning journey and explore new modules today.</p>
+            </div>
+        </section>
+
+        <section id="teacher-actions" class="courses-section" style="display: none;">
+            <div class="section-header"><h2>Instructor Controls</h2></div>
+            <div class="course-grid">
+                <a href="upload_module.html" class="aesthetic-card" style="background: linear-gradient(135deg, #f2994a, #f2c94c); color: #1a1a1a !important;">
+                    <i class="fas fa-plus-circle card-icon" style="color: #1a1a1a;"></i>
+                    <h3 style="color: #1a1a1a !important;">Create New Module</h3>
+                </a>
+            </div>
+        </section>
+
+        <section class="courses-section">
+            <div class="section-header">
+                <h2>Your Courses</h2>
+                <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div id="modules-container" class="course-grid">
+                </div>
+        </section>
+    </main>
+</div>
+
+<script>
+    const aestheticGradients = [
+        'linear-gradient(135deg, #3d6cb9, #1c498d)',
+        'linear-gradient(135deg, #744b8b, #431154)',
+        'linear-gradient(135deg, #9a3d4d, #6e0018)'
+    ];
+
+    function getCardIcon(title) {
+        const lowerTitle = title.toLowerCase();
+        if (lowerTitle.includes('web')) return 'fa-code';
+        if (lowerTitle.includes('database')) return 'fa-database';
+        if (lowerTitle.includes('app')) return 'fa-mobile-alt';
+        if (lowerTitle.includes('design')) return 'fa-paint-brush';
+        return 'fa-book';
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        if (!userData) { window.location.href = "index.html"; return; }
+
+        document.getElementById("welcome-message").textContent = `Welcome back, ${userData.name}! 👋`;
+        document.getElementById("user-role-tag").textContent = userData.role_type;
+        document.getElementById("user-avatar").textContent = userData.name.substring(0, 2).toUpperCase();
+
+        if (userData.role_type === 'teacher') {
+            const teacherActions = document.getElementById("teacher-actions");
+            const teacherNavLink = document.getElementById("teacher-nav-link");
+            if(teacherActions) teacherActions.style.display = 'block';
+            if(teacherNavLink) teacherNavLink.style.display = 'block';
+        }
+ 
+        try {
+            const res = await fetch('/api/data');
+            const data = await res.json();
+            const container = document.getElementById('modules-container');
+            
+            if(!data.modules || data.modules.length === 0) {
+                container.innerHTML = "<p style='color:#7f8c8d;'>No modules added yet.</p>";
+                return;
+            }
+
+            data.modules.forEach((mod, index) => {
+                const bg = aestheticGradients[index % aestheticGradients.length];
+                const iconClass = getCardIcon(mod.title);
+
+                container.innerHTML += `
+                    <a href="module_view.html?id=${mod.id}" class="aesthetic-card" style="background: ${bg};">
+                        <i class="fas ${iconClass} card-icon"></i>
+                        <h3>${mod.title}</h3>
+                    </a>`;
+            });
+        } catch (error) {
+            console.error("Error loading courses:", error);
+        }
+    });
+
+    function logout() { 
+        localStorage.clear(); 
+        window.location.href = "index.html"; 
+    }
+</script>
+</body>
+</html>
