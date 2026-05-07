@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModuLearn | Module View</title>
+    <link rel="stylesheet" href="dashboard_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .module-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            padding: 30px;
+            color: white;
+        }
+
+        @media (max-width: 900px) {
+            .module-content-grid { grid-template-columns: 1fr; }
+        }
+
+        .text-section h1 { font-size: 2.5rem; margin-bottom: 20px; color: #f2994a; }
+
+        .text-section .content-details {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+            white-space: pre-wrap;
+            margin-bottom: 30px;
+        }
+
+        .video-section {
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 10px;
+            display: flex;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            align-self: start;
+        }
+
+        .video-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        .video-container iframe { width: 100%; height: 100%; border: none; }
+        
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: #2a3d4c;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* Delete Button Style */
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            display: none; /* Hidden by default */
+            transition: background 0.3s;
+        }
+        .btn-delete:hover { background: #c0392b; }
+        .btn-delete i { margin-right: 8px; }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <nav class="sidebar">
+        <div class="logo-section">
+            <img src="modulearn_logo.png" class="sidebar-logo" alt="Logo">
+            <span class="logo-text">ModuLearn</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i><span class="link-text">Back to Home</span></a></li>
+        </ul>
+    </nav>
+
+    <main class="content-wrapper">
+        <header class="top-bar">
+            <div class="user-profile-top"><div id="user-avatar" class="avatar">??</div></div>
+        </header>
+
+        <section class="courses-section" style="padding-top:20px;">
+            <a href="dashboard.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+            
+            <div id="module-display" class="module-content-grid">
+                <div class="text-section">
+                    <h1>Loading Module...</h1>
+                    <div class="content-details"></div>
+                    
+                    <button id="delete-btn" class="btn-delete">
+                        <i class="fas fa-trash"></i> Delete This Module
+                    </button>
+                </div>
+                <div class="video-section">
+                    <div class="video-container"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+    function getYoutubeId(url) {
+        if (!url) return null;
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        if (!userData) { window.location.href = "index.html"; return; }
+        document.getElementById("user-avatar").textContent = userData.name.substring(0, 2).toUpperCase();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const moduleId = urlParams.get('id');
+
+        if (!moduleId) {
+            document.getElementById('module-display').innerHTML = "<h2>Error: No ID provided.</h2>";
+            return;
+        }
+
+        // Ipakita ang Delete button kung teacher
+        const deleteBtn = document.getElementById('delete-btn');
+        if (userData.role_type === 'teacher') {
+            deleteBtn.style.display = 'block';
+        }
+
+        try {
+            const res = await fetch(`/api/module/${moduleId}`);
+            if(!res.ok) throw new Error("Module not found");
+            const moduleData = await res.json();
+            
+            document.querySelector('.text-section h1').textContent = moduleData.title;
+            document.querySelector('.content-details').textContent = moduleData.content;
+
+            const vidId = getYoutubeId(moduleData.video_url);
+            const videoContainer = document.querySelector('.video-container');
+            if (vidId) {
+                videoContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}" allowfullscreen></iframe>`;
+            } else {
+                document.querySelector('.video-section').style.display = 'none';
+                document.getElementById('module-display').style.gridTemplateColumns = '1fr';
+            }
+
+            // Logic para sa DELETE button
+            deleteBtn.onclick = async () => {
+                if (confirm(`Are you sure you want to delete "${moduleData.title}"?`)) {
+                    try {
+                        const delRes = await fetch(`/api/delete-module/${moduleId}`, {
+                            method: 'DELETE'
+                        });
+
+                        if (delRes.ok) {
+                            alert("Module deleted successfully.");
+                            window.location.href = "dashboard.html";
+                        } else {
+                            alert("Failed to delete module.");
+                        }
+                    } catch (err) {
+                        console.error("Delete Error:", err);
+                    }
+                }
+            };
+
+        } catch (error) {
+            document.getElementById('module-display').innerHTML = `<h2>Error: ${error.message}</h2>`;
+        }
+    });
+</script>
+</body>
+</html>

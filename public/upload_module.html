@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModuLearn | Create Module</title>
+    <link rel="stylesheet" href="dashboard_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS para sa Upload Module Page form */
+        .upload-form-container {
+            max-width: 600px;
+            margin: 0 auto; /* center the form */
+            padding: 30px;
+            background: #233142; /* darkish gray */
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .upload-form-container h1 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: #f2994a;
+            text-align: center;
+        }
+
+        .publish-form input, .publish-form textarea {
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            border-radius: 8px; 
+            border: 1px solid #444; 
+            background: #1a1a1a; 
+            color: white;
+            font-family: inherit;
+        }
+        
+        .publish-form textarea {
+            resize: vertical;
+        }
+
+        .btn-publish-submit {
+            width: 100%; 
+            padding: 12px; 
+            background: #f2994a; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .btn-publish-submit:hover {
+            background: #e68a00;
+        }
+        
+        .btn-back-upload {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: #2a3d4c;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .btn-back-upload:hover { background: #3d6cb9; }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <nav class="sidebar">
+        <div class="logo-section">
+            <img src="modulearn_logo.png" class="sidebar-logo" alt="Logo">
+            <span class="logo-text">ModuLearn</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html"><i class="fas fa-arrow-left"></i><span class="link-text">Dashboard</span></a></li>
+        </ul>
+    </nav>
+
+    <main class="content-wrapper">
+        <header class="top-bar">
+            <div class="user-profile-top"><div id="user-avatar" class="avatar">??</div></div>
+        </header>
+
+        <section class="courses-section" style="padding-top:20px;">
+            <a href="dashboard.html" class="btn-back-upload"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+            
+            <div class="upload-form-container">
+                <h1>Create New Module</h1>
+                <form action="/publish" method="POST" class="publish-form">
+                    <input type="text" name="title" placeholder="Module Title (e.g. Web Development)" required>
+                    <input type="text" name="video_url" placeholder="YouTube URL (e.g., https://youtu.be/...)">
+                    <textarea name="content" placeholder="Brief description or lecture notes..." rows="6"></textarea>
+                    <button type="submit" class="btn-publish-submit">Publish Module</button>
+                </form>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+    // Simple script para sa avatar
+    document.addEventListener("DOMContentLoaded", () => {
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        if (!userData || userData.role_type !== 'teacher') { 
+            window.location.href = "dashboard.html"; // Safety redirect kung student o di nakalogin
+            return; 
+        }
+        document.getElementById("user-avatar").textContent = userData.name.substring(0, 2).toUpperCase();
+    });
+</script>
+</body>
+</html>
