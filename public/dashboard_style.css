@@ -18,7 +18,7 @@ body {
     height: 100%;
 }
 
-/* SIDEBAR (MATATAKLUBAN VERSION) */
+/* SIDEBAR */
 .sidebar {
     width: 70px;
     background-color: #121926;
@@ -28,9 +28,9 @@ body {
     border-right: 1px solid #1e293b;
     transition: width 0.3s ease;
     overflow: hidden;
-    position: fixed; /* Keep it fixed on the left */
+    position: fixed; 
     height: 100%;
-    z-index: 1000; /* Stays on top of content */
+    z-index: 1000; 
 }
 
 .sidebar:hover {
@@ -47,7 +47,9 @@ body {
     padding-left: 5px;
 }
 
-.sidebar-logo { width: 35px; }
+.sidebar-logo { 
+    width: 35px; 
+}
 
 .logo-text {
     font-size: 20px;
@@ -58,11 +60,16 @@ body {
     white-space: nowrap;
 }
 
-.sidebar:hover .logo-text { opacity: 1; }
+.sidebar:hover .logo-text { 
+    opacity: 1; 
+}
 
-/* NAV LINKS */
-.nav-links { list-style: none; }
-.nav-links li { margin-bottom: 8px; }
+.nav-links { 
+    list-style: none; 
+}
+.nav-links li { 
+    margin-bottom: 8px; 
+}
 
 .nav-links a {
     display: flex;
@@ -87,16 +94,25 @@ body {
     margin-left: 10px;
 }
 
-.sidebar:hover .link-text { opacity: 1; }
+.sidebar:hover .link-text { 
+    opacity: 1; 
+}
 
-.nav-links li.active a { background-color: #2563eb; color: #fff; }
-.nav-links a:hover { background-color: #1e293b; color: #fff; }
+.nav-links li.active a { 
+    background-color: #2563eb; 
+    color: #fff; 
+}
 
-/* CONTENT WRAPPER - STAYS STILL */
+.nav-links a:hover { 
+    background-color: #1e293b; 
+    color: #fff; 
+}
+
+/* CONTENT */
 .content-wrapper {
     flex: 1;
     padding: 25px 40px;
-    margin-left: 70px; /* Space for the collapsed sidebar */
+    margin-left: 70px; 
     width: 100%;
 }
 
@@ -149,6 +165,7 @@ body {
     font-size: 12px;
     font-weight: bold;
     color: white;
+    text-transform: uppercase;
 }
 
 /* WELCOME BANNER */
@@ -159,8 +176,14 @@ body {
     margin-bottom: 30px;
 }
 
-.welcome-text h1 { font-size: 28px; margin-bottom: 10px; }
-.welcome-text p { opacity: 0.9; }
+.welcome-text h1 { 
+    font-size: 28px; 
+    margin-bottom: 10px; 
+}
+
+.welcome-text p { 
+    opacity: 0.9; 
+}
 
 /* COURSES SECTION */
 .section-header {
@@ -170,7 +193,11 @@ body {
     margin-bottom: 20px;
 }
 
-.view-all { color: #4facfe; text-decoration: none; font-size: 14px; }
+.view-all { 
+    color: #4facfe; 
+    text-decoration: none; 
+    font-size: 14px; 
+}
 
 .course-grid {
     display: grid;
@@ -190,9 +217,22 @@ body {
     transition: transform 0.2s;
 }
 
-.course-card:hover { transform: translateY(-5px); }
-.course-card i { font-size: 40px; }
+.course-card:hover { 
+    transform: translateY(-5px); 
+}
 
-.card-blue { background-color: #1e3a8a; }
-.card-purple { background-color: #581c87; }
-.card-pink { background-color: #831843; }
+.course-card i { 
+    font-size: 40px; 
+}
+
+.card-blue { 
+    background-color: #1e3a8a; 
+}
+
+.card-purple { 
+    background-color: #581c87; 
+}
+
+.card-pink { 
+    background-color: #831843; 
+}
