@@ -18,13 +18,10 @@ The project focuses on empowering **Educators** to share and monetize their expe
 *   🔐 **Secure Access:** Login and Sign-Up buttons for secure account management.
 *   📊 **User Dashboard:** A centralized overview of enrolled courses, progress tracking, and announcements.
 *   🔔 **Notification System:** Real-time updates on course deadlines and messages.
-*   🌓 **Dark Mode:** A user-friendly interface option for comfortable viewing in low-light environments.
 
 ### 📖 Student Experience (Basic & Premium)
 *   🔍 **Course Discovery:** Advanced search functionality to explore modules based on interests.
 *   🔓 **Freemium Access:** Access to selected free lessons, notes, and interactive quizzes.
-*   📥 **Offline Learning:** Premium users can download materials for access without internet.
-*   📜 **Certifications:** Official Certificates of Completion awarded upon finishing courses.
 
 ### 👨‍🏫 Educator Tools (Basic & Premium)
 *   📝 **Course Management:** Comprehensive tools for creating, organizing, and uploading video lessons.
@@ -37,7 +34,6 @@ The project focuses on empowering **Educators** to share and monetize their expe
 
 ### **Frontend**
 *   **Web Interface:** Responsive design for desktop and browser-based learning.
-*   **Mobile Application:** Specialized app for learning on-the-go in both urban and rural areas.
 
 ### **Backend**
 *   **Structured Modules:** Lessons arranged logically to ensure beginners and experienced learners can navigate easily.
@@ -62,9 +58,8 @@ The project focuses on empowering **Educators** to share and monetize their expe
 modulearn-platform/
 │── backend/            # API, Authentication, and Analytics logic
 │── frontend-web/       # Web-based learning interface
-│── mobile-app/         # iOS and Android application files
 │── database/           # Schemas for course tracking and user data
-│── assets/             # Course videos, PDFs, and certificates
+│── assets/             # Course videos, PDFs
 │── README.md           # Project documentation
 ```
 
@@ -79,8 +74,8 @@ modulearn-platform/
 
 ## 👨‍💻 Authors & Development Team
 
-**Developed by:** Sam (Lead Developer/Computer Engineering Student at PLSP)  
-**Research Partners:** Flores, Lacdang, Undangan, Adtoon, and Linsangan
+**Developed by:**  (Computer Engineering Student at PLSP)  
+**Research Partners:** Bayan, Quinita, Manimtim, Silvino, Pulutan, Sanchez
 
 ---
 
