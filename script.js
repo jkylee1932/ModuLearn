@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (error) {
                 console.error("Login error:", error);
-                showNotification("Server error. Try muli mamaya.", true);
+                showNotification("Server error. Try again later.", true);
             }
         });
     }
