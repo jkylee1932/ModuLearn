@@ -85,5 +85,5 @@ modulearn-platform/
 ---
 
 ## 📄 License
-
+URL: https://modulearn-aihc.onrender.com/
 This project is for educational purposes and is part of the ongoing development of the ModuLearn ecosystem.
