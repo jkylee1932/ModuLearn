@@ -23,7 +23,7 @@ router.post('/register', async (req, res) => {
         // 3. Insert into PostgreSQL
         // Note: Using the section_id provided by the frontend
         const newUser = await pool.query(
-            'INSERT INTO users (name, email, password_hash, role_type, section_id) VALUES ($1, $2, $3, $4, $5) RETURNING id, name, email',
+            'INSERT INTO users (name, email, password, role_type, section_id) VALUES ($1, $2, $3, $4, $5) RETURNING id, name, email',
             [name, email, hashedPassword, role_type, section_id]
         );
 
