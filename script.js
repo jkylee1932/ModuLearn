@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. SELECTION OF ELEMENTS (Auth & Dashboard) ---
+    // --- 1. SELECTION OF ELEMENTS ---
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
     const statusAlert = document.getElementById('status-alert');
@@ -8,15 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const toRegister = document.getElementById('to-register');
     const toLogin = document.getElementById('to-login');
 
-    // Dashboard 
+    // Dashboard elements
     const welcomeMessage = document.getElementById('welcome-message');
     const userAvatar = document.getElementById('user-avatar');
     const navLinks = document.querySelectorAll('.nav-links li');
 
     // --- 2. AUTHENTICATION & SECURITY CHECK ---
+    // Kapag nasa dashboard.html, i-check kung logged in na
     if (window.location.pathname.includes('dashboard.html')) {
         if (!localStorage.getItem('userData')) {
             window.location.href = "index.html";
+            return;
         }
     }
 
@@ -39,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 4. Login <-> Register ---
+    // --- 4. TOGGLE LOGIN <-> REGISTER ---
     if (toRegister) {
         toRegister.addEventListener('click', (e) => {
             e.preventDefault();
@@ -68,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
-    // --- 6. LOGIN LOGIC ---
+    // --- 6. LOGIN LOGIC  ---
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -76,24 +78,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const passwordField = document.getElementById('login-password');
             
             try {
-                const response = await fetch('http://localhost:5000/api/auth/login', {
+                // Inalis ang http://localhost:5000 para gumana sa Render
+                const response = await fetch('/api/auth/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: emailField.value, password: passwordField.value })
+                    body: JSON.stringify({ 
+                        email: emailField.value, 
+                        password: passwordField.value 
+                    })
                 });
+                
                 const result = await response.json();
 
                 if (response.ok) {
-                 
                     localStorage.setItem('userData', JSON.stringify(result.user));
                     window.location.href = "dashboard.html";
                 } else {
-                    showNotification("Wrong password. Try again.", true);
+                    showNotification(result.message || "Wrong credentials. Try again.", true);
                     passwordField.value = "";
                     passwordField.focus();
                 }
             } catch (error) {
-                showNotification("Server error. Try again later.", true);
+                console.error("Login error:", error);
+                showNotification("Server error. Try muli mamaya.", true);
             }
         });
     }
@@ -108,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const role_type = document.getElementById('reg-role').value;
 
             try {
-                const response = await fetch('http://localhost:5000/api/auth/register', {
+                const response = await fetch('/api/auth/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
@@ -127,12 +134,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     showNotification(err.message || "Registration failed.", true);
                 }
             } catch (error) {
+                console.error("Registration error:", error);
                 showNotification("Server connection failed.", true);
             }
         });
     }
 });
 
+// --- 8. LOGOUT FUNCTION ---
 function logout() {
     localStorage.clear();
     window.location.href = "index.html";
