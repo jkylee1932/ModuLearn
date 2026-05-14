@@ -55,12 +55,19 @@ The project focuses on empowering **Educators** to share and monetize their expe
 ## 📂 Project Structure
 
 ```text
-modulearn-platform/
-│── backend/            # API, Authentication, and Analytics logic
-│── frontend-web/       # Web-based learning interface
-│── database/           # Schemas for course tracking and user data
-│── assets/             # Course videos, PDFs
-│── README.md           # Project documentation
+modulearn/
+│── config/                # Database connection settings (db.js)
+│── routes/                # API Routes (auth.js, etc.)
+│── dashboard.html         # Main user interface
+│── dashboard_style.css    # Styles for the dashboard
+│── index.html             # Landing/Login page
+│── module_view.html       # Interface for viewing modules
+│── upload_module.html     # Interface for module uploads
+│── server.js              # Entry point of the Node.js server
+│── script.js              # Client-side logic
+│── style.css              # Global styles
+│── package.json           # Project dependencies and metadata
+│── README.md              # Project documentation
 ```
 
 ---
