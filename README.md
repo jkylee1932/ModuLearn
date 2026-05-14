@@ -25,8 +25,6 @@ The project focuses on empowering **Educators** to share and monetize their expe
 
 ### 👨‍🏫 Educator Tools (Basic & Premium)
 *   📝 **Course Management:** Comprehensive tools for creating, organizing, and uploading video lessons.
-*   💰 **Monetization Suite:** Premium features allowing educators to earn income from their expertise.
-*   📈 **Advanced Analytics:** Detailed insights into student performance and course engagement.
 
 ---
 
@@ -46,7 +44,6 @@ The project focuses on empowering **Educators** to share and monetize their expe
 
 ## 🧰 Technologies Used
 *   💻 **Full-Stack Web Development:** (Node.js, PostgreSQL, and JWT integration).
-*   📱 **Mobile Development Tools:** For multi-platform application support.
 *   📊 **Data Analytics:** For personalized learning paths and educator insights.
 *   ☁️ **Cloud Integration:** For hosting downloadable materials and course content.
 
@@ -72,13 +69,6 @@ modulearn/
 
 ---
 
-## 🔐 Security & Engagement
-*   **Data Protection:** Secure profile management and preference handling.
-*   **Reliability:** Responsive customer support through help centers and chat systems.
-*   **Community:** Feedback channels and discussion forums to foster a culture of improvement.
-
----
-
 ## 👨‍💻 Authors & Development Team
 
 **Developed by:**  (Computer Engineering Student at PLSP)  
@@ -87,5 +77,5 @@ modulearn/
 ---
 
 ## 📄 License
-URL: https://modulearn-aihc.onrender.com/
+URL: https://modulearn-aihc.onrender.com/  
 This project is for educational purposes and is part of the ongoing development of the ModuLearn ecosystem.
