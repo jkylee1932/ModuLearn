@@ -79,3 +79,11 @@ modulearn/
 ## 📄 License
 URL: https://modulearn-aihc.onrender.com/  
 This project is for educational purposes and is part of the ongoing development of the ModuLearn ecosystem.
+
+MOBILE VIEW
+<img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/b113ae43-66b4-4c13-8b76-d5a32bde9315" />
+
+WEB VIEW
+<img width="1918" height="969" alt="image" src="https://github.com/user-attachments/assets/afa2a618-46cb-407b-b0c8-5ef4d1130628" />
+
+
