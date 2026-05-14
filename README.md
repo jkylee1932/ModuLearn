@@ -86,4 +86,8 @@ MOBILE VIEW
 WEB VIEW
 <img width="1918" height="969" alt="image" src="https://github.com/user-attachments/assets/afa2a618-46cb-407b-b0c8-5ef4d1130628" />
 
+VM/LINUX VEIW
+<img width="1271" height="898" alt="image" src="https://github.com/user-attachments/assets/6cae50d3-fe09-4f82-b8a3-7c3c3588c109" />
+
+
 
